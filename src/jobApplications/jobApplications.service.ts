@@ -39,74 +39,18 @@ export class JobApplicationsService {
       employer: foundEmployer._id,
     };
 
-    const newJob = new this.jobModel(data);
+    const newJobApplication = new this.jobModel(data);
 
-    newJob.save();
+    newJobApplication.save();
 
     await foundEmployer.updateOne({
       $push: {
-        jobs: newJob._id,
+        jobs: newJobApplication._id,
       },
     });
 
     return {
       message: 'Job Application created succuessfully',
     };
-  }
-
-  async updateJobApplication(
-    employerId: string,
-    jobId: string,
-    body: UpdateJobApplicationDto,
-  ) {
-    if (!Object.keys(body).length) {
-      throw new BadRequestException('Body is empty');
-    }
-
-    const foundUser = await this.userModel.findById(employerId);
-
-    if (!foundUser) {
-      throw new NotFoundException('Employer not found');
-    }
-
-    const foundJob = await this.jobModel.findById(jobId);
-
-    if (!foundJob) {
-      throw new NotFoundException('Job not found');
-    }
-
-    await this.jobModel.findByIdAndUpdate(jobId, body, {
-      new: true,
-    });
-
-    return {
-      message: 'Job updated succuessfully',
-    };
-  }
-
-  async getAllJobApplcations(userId: string) {
-    const foundUser = await this.userModel.findById(userId);
-
-    if (!foundUser) {
-      throw new NotFoundException('Employer not found');
-    }
-
-    return this.jobModel.find({ employer: userId });
-  }
-
-  async getJobApplicationById(userId: string, jobApplicationId: string) {
-    const foundUser = await this.userModel.findById(userId);
-
-    if (!foundUser) {
-      throw new NotFoundException('Employer not found');
-    }
-
-    const foundJobApplication = await this.jobModel.findById(jobApplicationId);
-
-    if (!foundJobApplication) {
-      throw new NotFoundException('Job Application not found');
-    }
-
-    return foundJobApplication;
   }
 }

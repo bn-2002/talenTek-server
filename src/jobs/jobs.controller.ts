@@ -35,20 +35,12 @@ export class JobsController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
-  async getAllJobs(@Request() req) {
-    return this.jobsService.getAllJobs(req.userId);
+  async getAllJobs() {
+    return this.jobsService.getAllJobs();
   }
 
   @Get(':jobId')
-  @UseGuards(JwtAuthGuard)
-  async getJobById(@Request() req, @Param('jobId') jobId: string) {
-    return this.jobsService.getJobById(req.userId, jobId);
-  }
-
-  @Delete(':jobId')
-  @UseGuards(JwtAuthGuard)
-  async deleteJob(@Request() req, @Param('jobId') jobId: string) {
-    return this.jobsService.deleteJob(req.userId, jobId);
+  async getJobById(@Param('jobId') jobId: string) {
+    return this.jobsService.getJobById(jobId);
   }
 }

@@ -20,36 +20,13 @@ export class JobApplicationsController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  async createJob(
-    @Body() createJobDto: CreateJobApplicationDto,
+  async createJobApplication(
+    @Body() createJobApplicationDto: CreateJobApplicationDto,
     @Request() req,
   ) {
-    return this.jobsService.createJobApplication(createJobDto, req.userId);
-  }
-
-  @Patch(':jobId')
-  @UseGuards(JwtAuthGuard)
-  async updateJob(
-    @Body() updateJobDto: UpdateJobApplicationDto,
-    @Request() req,
-    @Param('jobId') jobId: string,
-  ) {
-    return this.jobsService.updateJobApplication(
+    return this.jobsService.createJobApplication(
+      createJobApplicationDto,
       req.userId,
-      jobId,
-      updateJobDto,
     );
-  }
-
-  @Get()
-  @UseGuards(JwtAuthGuard)
-  async getAllJobs(@Request() req) {
-    return this.jobsService.getAllJobApplcations(req.userId);
-  }
-
-  @Get(':jobId')
-  @UseGuards(JwtAuthGuard)
-  async getJobById(@Request() req, @Param('jobId') jobId: string) {
-    return this.jobsService.getJobApplicationById(req.userId, jobId);
   }
 }

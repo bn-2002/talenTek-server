@@ -11,6 +11,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Employer, EmployerDocument } from './schemas/employer.schema';
 import { CreateEmployerDto } from './dto/create-employer.dto';
 import { LoginUserDto } from 'src/common/dto/login-user.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {

@@ -50,17 +50,4 @@ export class ApplicantsService {
 
     return { message: 'Profile updated successfuly' };
   }
-
-  async deleteApplicant(id: string) {
-    const applicant = await this.ApplicantModel.findById(id);
-
-    if (!applicant) {
-      throw new NotFoundException('Applicant not found');
-    }
-    await this.ApplicantModel.findByIdAndDelete(id);
-
-    //TODO delete the job applications that this applicant has made
-
-    return { message: 'Your account deleted successfuly' };
-  }
 }

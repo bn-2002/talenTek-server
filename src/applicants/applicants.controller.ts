@@ -43,10 +43,4 @@ export class ApplicantsController {
   async updateProfile(@Body() body: UpdateApplicantDto, @Request() req) {
     return this.applicantsService.updateApplicant(req.userId, body);
   }
-
-  @Delete()
-  @UseGuards(JwtAuthGuard)
-  async deleteApplicant(@Request() req) {
-    return this.applicantsService.deleteApplicant(req.userId);
-  }
 }

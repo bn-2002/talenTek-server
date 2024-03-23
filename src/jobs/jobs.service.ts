@@ -76,23 +76,11 @@ export class JobsService {
     };
   }
 
-  async getAllJobs(userId: string) {
-    const foundUser = await this.userModel.findById(userId);
-
-    if (!foundUser) {
-      throw new NotFoundException('Employer not found');
-    }
-
-    return this.jobModel.find({ employer: userId });
+  async getAllJobs() {
+    return this.jobModel.find();
   }
 
-  async getJobById(userId: string, jobId: string) {
-    const foundUser = await this.userModel.findById(userId);
-
-    if (!foundUser) {
-      throw new NotFoundException('Employer not found');
-    }
-
+  async getJobById(jobId: string) {
     const foundJob = await this.jobModel.findById(jobId);
 
     if (!foundJob) {
@@ -100,23 +88,5 @@ export class JobsService {
     }
 
     return foundJob;
-  }
-
-  async deleteJob(userId: string, jobId: string) {
-    const user = await this.userModel.findById(userId);
-
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-
-    const job = await this.jobModel.findById(jobId);
-
-    if (!job) {
-      throw new NotFoundException('Job not found');
-    }
-
-    await this.jobModel.deleteOne({ _id: jobId });
-
-    return { message: 'Job deleted successfuly' };
   }
 }
