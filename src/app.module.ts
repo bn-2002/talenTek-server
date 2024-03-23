@@ -21,6 +21,7 @@ import { JobApplicationsModule } from './jobApplications/jobApplications.module'
     EmployersModule,
     ApplicantsModule,
     JobsModule,
+    JobApplicationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

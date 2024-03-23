@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
-import { JobApplication } from 'src/jobApplications/schemas/jobApplication.schema';
+import { HydratedDocument } from 'mongoose';
 
 export type ApplicantDocument = HydratedDocument<Applicant>;
 
@@ -23,12 +22,6 @@ export class Applicant {
 
   @Prop()
   age: number;
-
-  @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'JobApplication' }],
-    default: [],
-  })
-  jobApplications?: JobApplication[];
 }
 
 export const ApplicantSchema = SchemaFactory.createForClass(Applicant);

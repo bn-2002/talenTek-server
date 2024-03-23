@@ -17,6 +17,7 @@ import { UpdateEmployerDto } from './dto/update-employer.dto';
 import { LoginUserDto } from 'src/common/dto/login-user.dto';
 import { CreateJobDto } from 'src/jobs/dto/CreateJobDto';
 import { JobsService } from 'src/jobs/jobs.service';
+import { UpdateJobApplicationDto } from './dto/update-job-application-dto';
 
 @Controller('employer')
 export class EmployersController {
@@ -60,10 +61,42 @@ export class EmployersController {
     return this.employersService.getJobById(req.userId, jobId);
   }
 
+  @Get('job-application/:jobApplicationId')
+  @UseGuards(JwtAuthGuard)
+  async getJobApplicationById(
+    @Request() req,
+    @Param('jobApplicationId') jobApplicationId: string,
+  ) {
+    return this.employersService.getJobApplicationById(
+      req.userId,
+      jobApplicationId,
+    );
+  }
+
+  @Get('job-applications/:jobId')
+  @UseGuards(JwtAuthGuard)
+  async getJobApplications(@Request() req, @Param('jobId') jobId: string) {
+    return this.employersService.getJobApplications(req.userId, jobId);
+  }
+
   @Patch('profile')
   @UseGuards(JwtAuthGuard)
   async updateProfile(@Body() body: UpdateEmployerDto, @Request() req) {
     return this.employersService.updateEmployer(req.userId, body);
+  }
+
+  @Patch('job-application/:jobApplicationId')
+  @UseGuards(JwtAuthGuard)
+  async updateJobApplication(
+    @Body() body: UpdateJobApplicationDto,
+    @Request() req,
+    @Param('jobApplicationId') jobApplicationId: string,
+  ) {
+    return this.employersService.updateJobApplication(
+      req.userId,
+      body,
+      jobApplicationId,
+    );
   }
 
   @Delete()

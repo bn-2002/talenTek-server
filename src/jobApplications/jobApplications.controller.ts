@@ -16,17 +16,5 @@ import { UpdateJobApplicationDto } from './dto/UpdateJobApplicationDto';
 
 @Controller('job-application')
 export class JobApplicationsController {
-  constructor(private jobsService: JobApplicationsService) {}
-
-  @Post()
-  @UseGuards(JwtAuthGuard)
-  async createJobApplication(
-    @Body() createJobApplicationDto: CreateJobApplicationDto,
-    @Request() req,
-  ) {
-    return this.jobsService.createJobApplication(
-      createJobApplicationDto,
-      req.userId,
-    );
-  }
+  constructor(private jobApplicationService: JobApplicationsService) {}
 }
