@@ -46,6 +46,12 @@ export class ApplicantsController {
     return this.applicantsService.getJobApplicationStatus(req.userId, jobId);
   }
 
+  @Get('job-applications')
+  @UseGuards(JwtAuthGuard)
+  async getJobApplications(@Request() req) {
+    return this.applicantsService.getJobApplications(req.userId);
+  }
+
   @Get('profile')
   @UseGuards(JwtAuthGuard)
   async getProfile(@Request() req) {
@@ -55,15 +61,6 @@ export class ApplicantsController {
   @Patch('profile')
   @UseGuards(JwtAuthGuard)
   async updateProfile(@Body() body: UpdateApplicantDto, @Request() req) {
-    return this.applicantsService.updateApplicant(req.userId, body);
-  }
-
-  @Patch('profile')
-  @UseGuards(JwtAuthGuard)
-  async getAllJobApplications(
-    @Body() body: UpdateApplicantDto,
-    @Request() req,
-  ) {
     return this.applicantsService.updateApplicant(req.userId, body);
   }
 }

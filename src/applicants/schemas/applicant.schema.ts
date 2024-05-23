@@ -22,6 +22,15 @@ export class Applicant {
 
   @Prop()
   age: number;
+
+  @Prop()
+  skills?: string[];
+
+  @Prop()
+  educational_background?: string[];
+
+  @Prop()
+  work_experiences?: string[];
 }
 
 export const ApplicantSchema = SchemaFactory.createForClass(Applicant);

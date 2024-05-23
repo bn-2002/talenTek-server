@@ -134,7 +134,8 @@ export class EmployersService {
       .findById(jobApplicationId)
       .populate({
         path: 'applicant',
-        select: 'first_name last_name email phone_number',
+        select:
+          'first_name last_name email phone_number skills work_experiences educational_background',
       })
       .select('applicant status');
 

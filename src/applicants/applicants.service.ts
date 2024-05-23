@@ -54,10 +54,38 @@ export class ApplicantsService {
     }
   }
 
+  async getJobApplications(userId: string) {
+    const foundApplicant = await this.applicantModel.findById(userId);
+
+    if (!foundApplicant) {
+      throw new NotFoundException('Employer not found');
+    }
+
+    const jobApplicationsForThisApplicant = this.jobApplicationModel
+      .find({
+        applicant: foundApplicant,
+      })
+      .populate({
+        path: 'job',
+        select: 'title description company_name',
+      })
+      .select('job status');
+
+    return jobApplicationsForThisApplicant;
+  }
+
   async getApplicantById(id: string) {
     const applicant = await this.applicantModel
       .findById(id)
-      .select(['first_name', 'last_name', 'email', 'phone_number']);
+      .select([
+        'first_name',
+        'last_name',
+        'email',
+        'phone_number',
+        'skills',
+        'educationa_background',
+        'work_experiences',
+      ]);
     if (!applicant) {
       throw new NotFoundException('Applicant not found');
     }
