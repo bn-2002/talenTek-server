@@ -7,6 +7,8 @@ import { EmployersModule } from './employers/employers.module';
 import { JobsModule } from './jobs/jobs.module';
 import { ApplicantsModule } from './applicants/applicants.module';
 import { JobApplicationsModule } from './jobApplications/jobApplications.module';
+import { AdminsModule } from './admins/admins.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { JobApplicationsModule } from './jobApplications/jobApplications.module'
     ApplicantsModule,
     JobsModule,
     JobApplicationsModule,
+    AdminsModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -48,8 +48,7 @@ export class Job {
   @Prop()
   company_website?: string;
 
-  //TODO change it to false
-  @Prop({ default: true })
+  @Prop({ default: false })
   approved?: boolean;
 
   @Prop({ default: false })
@@ -57,12 +56,6 @@ export class Job {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Employer' })
   employer: Employer;
-
-  // @Prop({
-  //   type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'JobApplication' }],
-  //   default: [],
-  // })
-  // JobApplications?: JobApplication[];
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);

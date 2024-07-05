@@ -77,7 +77,7 @@ export class JobsService {
   }
 
   async getAllJobs() {
-    return this.jobModel.find();
+    return this.jobModel.find({ approved: true });
   }
 
   async getJobById(jobId: string) {
