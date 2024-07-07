@@ -76,8 +76,21 @@ export class JobsService {
     };
   }
 
-  async getAllJobs() {
-    return this.jobModel.find({ approved: true });
+  //FIXME
+  async getAllJobs(query: {
+    search_term?: string;
+    search_field?: 'job_title' | 'job_description' | 'skill';
+  }) {
+    const { search_term, search_field } = query;
+    const filter: any = { approved: true };
+
+    if (search_term && search_field) {
+      filter[search_field] = { $regex: new RegExp(search_term, 'i') }; // Case-insensitive search
+    }
+
+    // If no search criteria provided, return all jobs
+    const jobs = await this.jobModel.find(filter).exec();
+    return jobs;
   }
 
   async getJobById(jobId: string) {

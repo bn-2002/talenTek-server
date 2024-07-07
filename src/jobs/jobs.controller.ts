@@ -8,6 +8,7 @@ import {
   Param,
   Patch,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/gaurd/jwt-auth.guard';
 import { JobsService } from './jobs.service';
@@ -35,8 +36,15 @@ export class JobsController {
   }
 
   @Get()
-  async getAllJobs() {
-    return this.jobsService.getAllJobs();
+  async getAllJobs(
+    @Query('search_term') searchTerm?: string,
+    @Query('search_field')
+    searchField?: 'job_title' | 'job_description' | 'skill',
+  ) {
+    return this.jobsService.getAllJobs({
+      search_term: searchTerm,
+      search_field: searchField,
+    });
   }
 
   @Get(':jobId')
