@@ -1,5 +1,5 @@
 ## 🌟 Overview
-#### Talenteck Client is the backend of a full-stack job portal.  
+#### Talenteck Server is the backend of a full-stack job portal.  
 
 > This project is developed as a university project, enabling employers to post jobs and job seekers to apply and track applications.
 
